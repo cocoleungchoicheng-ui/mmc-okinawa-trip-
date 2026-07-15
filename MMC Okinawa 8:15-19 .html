@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MMC 沖繩盛夏閨蜜之旅</title>
+    <!-- Importing Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght=300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #45B6B6;       /* Tiffany Blue / Ocean Aqua */
+            --primary-light: #E0F7FA; /* Light Sky Aqua */
+            --accent-peach: #FF8A7A;  /* Soft Peach */
+            --accent-peach-light: #FFF0ED;
+            --accent-yellow: #FFF176; /* Sunshine Yellow */
+            --accent-yellow-light: #FFFDE7;
+            --palm-green: #4EAD61;    /* Palm Green */
+            --palm-green-light: #E8F5E9;
+            --text-dark: #2C3E50;     /* Deep Navy Slate */
+            --text-light: #7F8C8D;
+            --bg-canvas: #F4FAFA;     /* Cool ocean-tinted canvas background */
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-canvas);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* Summer Vacation Styled Header */
+        header {
+            background: linear-gradient(135deg, #49C0C0 0%, #80DEEA 50%, #FFF59D 100%);
+            padding: 40px 20px 50px 20px;
+            text-align: center;
+            color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 16px;
+            background: radial-gradient(circle at 10px 16px, transparent 10px, var(--bg-canvas) 11px);
+            background-size: 20px 32px;
+        }
+
+        .header-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .trip-badge {
+            background-color: var(--white);
+            color: #1A535C;
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            letter-spacing: 1px;
+            border: 2px solid #1A535C;
+        }
+
+        header h1 {
+            font-size: calc(2.2rem - 2pt);
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #FFFFFF;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.25);
+            letter-spacing: 2px;
+        }
+
+        .trip-meta {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #FFFFFF;
+            margin-top: 5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* Sticky Navigation Tabs */
+        .tabs-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-bottom: 2px solid var(--primary-light);
+            overflow-x: auto;
+            white-space: nowrap;
+            display: flex;
+            justify-content: start;
+            padding: 12px 15px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* 讓 iOS 滑動更絲滑 */
+        }
+
+        /* Hide scrollbar for tabs */
+        .tabs-nav::-webkit-scrollbar {
+            display: none;
+        }
+        .tabs-nav {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .tab-btn {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            padding: 10px 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #5D6D7E;
+            cursor: pointer;
+            border-radius: 25px;
+            margin-right: 8px;
+            transition: all 0.25s ease;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            touch-action: manipulation; /* 解決手機瀏覽器 300ms 點擊延遲 */
+            -webkit-tap-highlight-color: transparent; /* 移除 iOS 點擊灰色高亮 */
+        }
+
+        /* 讓按鈕內的文字與圖標完全不響應滑鼠事件，防止 pointer-events 錯亂 */
+        .tab-btn * {
+            pointer-events: none;
+        }
+
+        .tab-btn:hover {
+            background-color: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary) !important;
+            color: var(--white) !important;
+            box-shadow: 0 4px 10px rgba(73, 192, 192, 0.3);
+        }
+
+        .tab-btn.guide-tab {
+            background-color: var(--accent-peach-light);
+            color: var(--accent-peach);
+            border: 1px dashed var(--accent-peach);
+        }
+
+        .tab-btn.guide-tab.active {
+            background-color: var(--accent-peach) !important;
+            color: var(--white) !important;
+            border-style: solid;
+            box-shadow: 0 4px 10px rgba(255, 138, 122, 0.3);
+        }
+
+        /* Main Container */
+        main {
+            max-width: 800px;
+            margin: 25px auto;
+            padding: 0 15px;
+        }
+
+        /* Tab Content Panel */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Overarching Info Card */
+        .meta-card {
+            background-color: var(--white);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 6px solid var(--primary);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .meta-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+
+        .meta-row .icon {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .meta-row strong {
+            color: #34495E;
+            white-space: nowrap;
+        }
+
+        /* Timeline & Cards */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            margin-left: 10px;
+            border-left: 3px dashed var(--primary-light);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -31px;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--white);
+            border: 4px solid var(--primary);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        /* 💡 電腦版 Hover 效果 */
+        @media (hover: hover) {
+            .timeline-item:hover .timeline-marker {
+                background-color: var(--accent-peach);
+                border-color: var(--accent-peach);
+                transform: scale(1.2);
+            }
+            .timeline-item:hover .card {
+                transform: scale(1.03);
+                box-shadow: 0 8px 25px rgba(255, 138, 122, 0.15);
+                border-color: rgba(255, 138, 122, 0.4);
+            }
+        }
+
+        /* 💡 手機版/觸控版 點擊啟用效果 (.active-item) */
+        .timeline-item.active-item .timeline-marker {
+            background-color: var(--accent-peach) !important;
+            border-color: var(--accent-peach) !important;
+            transform: scale(1.2) !important;
+        }
+
+        .timeline-item.active-item .card {
+            transform: scale(1.03) !important;
+            box-shadow: 0 8px 25px rgba(255, 138, 122, 0.18) !important;
+            border-color: rgba(255, 138, 122, 0.5) !important;
+        }
+
+        .time-badge {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: #1A535C;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(73, 192, 192, 0.1);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #556270;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        /* Detail sub-lists & specs */
+        .sub-details {
+            list-style-type: none;
+            margin-top: 10px;
+            padding-left: 2px;
+        }
+
+        .sub-details li {
+            position: relative;
+            padding-left: 18px;
+            font-size: 0.9rem;
+            color: #556270;
+            margin-bottom: 6px;
+        }
+
+        .sub-details li::before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.2rem;
+            position: absolute;
+            left: 2px;
+            top: -2px;
+        }
+
+        /* Custom boxes inside cards */
+        .box {
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .box-title {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .box-warning {
+            background-color: var(--accent-peach-light);
+            border-left: 4px solid var(--accent-peach);
+            color: #7E2A1F;
+        }
+        .box-warning .box-title {
+            color: #C0392B;
+        }
+
+        .box-food {
+            background-color: var(--accent-yellow-light);
+            border-left: 4px solid #FBC02D;
+            color: #5F4B00;
+        }
+        .box-food .box-title {
+            color: #F57F17;
+        }
+
+        .box-tip {
+            background-color: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            color: #1A535C;
+        }
+        .box-tip .box-title {
+            color: #0E7F7F;
+        }
+
+        .box-green {
+            background-color: var(--palm-green-light);
+            border-left: 4px solid var(--palm-green);
+            color: #1B5E20;
+        }
+        .box-green .box-title {
+            color: #2E7D32;
+        }
+
+        /* Tables style for Guide Page */
+        .table-responsive {
+            overflow-x: auto;
+            background-color: var(--white);
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: var(--primary-light);
+            color: #1A535C;
+            font-weight: 700;
+            padding: 15px;
+            border-bottom: 2px solid rgba(73, 192, 192, 0.2);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #EBF5F5;
+            color: #4A5568;
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .section-header {
+            font-size: 1.3rem;
+            color: #1A535C;
+            margin: 30px 0 15px 0;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid var(--accent-peach-light);
+            padding-bottom: 8px;
+        }
+
+        .checklist-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        @media (min-width: 600px) {
+            .checklist-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .checklist-card {
+            background-color: var(--white);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .checklist-card h4 {
+            font-size: 1rem;
+            color: var(--accent-peach);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .blessing-card {
+            background: linear-gradient(135deg, var(--accent-peach-light) 0%, #FFFDE7 100%);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            border: 2px dashed var(--accent-peach);
+            margin-top: 35px;
+        }
+
+        .blessing-card p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #7E2A1F;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .floating-top-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-size: 1.2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .floating-top-btn.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <span class="trip-badge">🌺 Summer Getaway</span>
+            <h1>MMC 沖繩盛夏閨蜜之旅</h1>
+            <div class="trip-meta">5 天 4 夜精緻島嶼行程 ‧ 2026/08/15 - 08/19 ✈️</div>
+        </div>
+    </header>
+
+    <!-- Tab Bar -->
+    <nav class="tabs-nav" id="tabsNav">
+        <button class="tab-btn active" data-day="1">🗓️ Day 1</button>
+        <button class="tab-btn" data-day="2">🗓️ Day 2</button>
+        <button class="tab-btn" data-day="3">🗓️ Day 3</button>
+        <button class="tab-btn" data-day="4">🗓️ Day 4</button>
+        <button class="tab-btn" data-day="5">🗓️ Day 5</button>
+        <button class="tab-btn guide-tab" data-day="6">💡 實用攻略</button>
+    </nav>
+
+    <!-- Main Itinerary -->
+    <main>
+
+        <!-- DAY 1 -->
+        <div class="tab-panel active" id="panel-1">
+            <div class="meta-card">
+                <div class="meta-row">
+                    <span class="icon">🏨</span>
+                    <div><strong>住宿地點：</strong>HOTEL Chula Vista SENAGA (瀨長島附近)</div>
+                </div>
+                <div class="meta-row">
+                    <span class="icon">📍</span>
+                    <div><strong>今日重點：</strong>啟程 ‧ 集合 ‧ 領車 ‧ 宿瀨長島 8 / 15 (六)</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">09:30 - 11:00</span>
+                    <div class="card">
+                        <h3>抵達港珠澳大橋口岸</h3>
+                        <p>乘坐金巴前往香港口岸。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">11:30 - 13:30</span>
+                    <div class="card">
+                        <h3>抵達香港國際機場第一航廈</h3>
+                        <p>建議在此處享用午餐，因一航美食選擇較多。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">13:30 - 14:00</span>
+                    <div class="card">
+                        <h3>前往第二航廈辦理登機</h3>
+                        <p>辦理 HK Express UO844 登機手續並通過安檢 (預留接駁輕軌時間)。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">14:25 - 18:05</span>
+                    <div class="card">
+                        <h3>搭乘 UO844 航班飛往沖繩那霸機場</h3>
+                        <p>UO844 14:25 (HKG) → 18:05 (OKA)</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">18:05 - 19:30</span>
+                    <div class="card">
+                        <h3>抵達沖繩那霸機場</h3>
+                        <p>辦理入境與過關。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">19:30 - 20:15</span>
+                    <div class="card">
+                        <h3>【Plan A】5人集合領車</h3>
+                        <p>搭乘租車公司的免費 Shuttle Bus 前往機場附近的營業所領取7人座愛車。</p>
+                        <div class="box box-warning">
+                            <span class="box-title">🚗 自駕溫馨提醒</span>
+                            <span>沖繩為右駕，剛拿到車請慢行，熟悉方向燈與雨刷位置（方向盤右側為方向燈）。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">20:30 - 22:00</span>
+                    <div class="card">
+                        <h3>辦理入住與享用精緻晚餐</h3>
+                        <p>抵達 HOTEL Chula Vista SENAGA 辦理 Check-in，隨後步行 or 開車前往附近享用晚餐。</p>
+                        <div class="box box-food">
+                            <span class="box-title">🍽️ 晚餐推薦：Tsukumi (つくみ)</span>
+                            <span><strong>特色：</strong>提供精緻的沖繩在地食材日式定食，高評價 4.4 分。<br>
+                            <strong>預算：</strong>1,800 - 3,000 日圓/人 | <strong>地點：</strong>瀨長島 Umikaji Terrace 店</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">22:00 ~</span>
+                    <div class="card">
+                        <h3>飯店休息</h3>
+                        <p>充足睡眠，準備迎戰明天的滿滿行程！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 2 -->
+        <div class="tab-panel" id="panel-2">
+            <div class="meta-card">
+                <div class="meta-row">
+                    <span class="icon">🏨</span>
+                    <div><strong>住宿地點：</strong>Aqua Shallows (恩納村/讀谷村附近)</div>
+                </div>
+                <div class="meta-row">
+                    <span class="icon">🛣️</span>
+                    <div><strong>今日路線：</strong>那霸市區 → 恩納村</div>
+                </div>
+                <div class="meta-row">
+                    <span class="icon">📍</span>
+                    <div><strong>今日重點：</strong>浴衣拍攝 ‧ 美濱美國村煙火秀 8 / 16 (日)</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">08:00 - 09:15</span>
+                    <div class="card">
+                        <h3>起床享用輕食</h3>
+                        <p>在飯店享用輕食早餐，整理隨身美妝。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">09:30 - 10:00</span>
+                    <div class="card">
+                        <h3>出發前往那霸市區</h3>
+                        <p>開車前往那霸市區的 茜 Akane 浴衣租借。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">10:00 - 12:30</span>
+                    <div class="card">
+                        <h3>【浴衣妝造時間】(已預約)</h3>
+                        <p>5人挑選喜愛的夏日浴衣款式，進行專業的髮型與服裝搭配。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">12:40 - 14:30</span>
+                    <div class="card">
+                        <h3>波上宮打卡拍照</h3>
+                        <p>建在懸崖之上的絕美神社，與下方的波之上海灘形成強烈對比。穿著浴衣在此拍照極具大片感！</p>
+                        <div class="box box-tip">
+                            <span class="box-title">📸 拍照攻略</span>
+                            <span>站在「臨海道路」的橋上，可以拍到懸崖上的波上宮全景；神社內的紅色鳥居也是必拍點。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">14:30 - 15:00</span>
+                    <div class="card">
+                        <h3>歸還浴衣</h3>
+                        <p>返回「茜 Akane」歸還浴衣並換回私服。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">15:00 - 16:30</span>
+                    <div class="card">
+                        <h3>【Plan B：先 Check-in 路線】</h3>
+                        <p>開車沿國道 58 號北上（約 1 小時車程），前往恩納村附近的 Aqua Shallows 辦理入住並放行李。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">17:00 - 18:00</span>
+                    <div class="card">
+                        <h3>前往北谷町美濱美國村 (American Village)</h3>
+                        <p>自飯店出發車程約 35 分鐘。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">18:30 - 21:00</span>
+                    <div class="card">
+                        <h3>美國村落日晚餐 & 煙火秀</h3>
+                        <p>感受充滿美式風情的夏夜浪漫。</p>
+                        <div class="box box-tip">
+                            <span class="box-title">🌅 美濱浪漫行程</span>
+                            <ul class="sub-details">
+                                <li><strong>日落：</strong>在 Sunset Beach 欣賞染紅整片天空的沖繩絕美夕陽。</li>
+                                <li><strong>晚餐：</strong>美國村內美式餐廳、塔可飯或海景 Cafe。</li>
+                                <li><strong>花火：</strong>20:00 開始（約 3 分鐘）。五彩煙火在夜空中綻放，極度浪漫。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">21:00 - 21:45</span>
+                    <div class="card">
+                        <h3>返回飯店</h3>
+                        <p>開車返回 Aqua Shallows 飯店休息。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 3 -->
+        <div class="tab-panel" id="panel-3">
+            <div class="meta-card">
+                <div class="meta-row">
+                    <span class="icon">🏨</span>
+                    <div><strong>住宿地點：</strong>Aqua Shallows</div>
+                </div>
+                <div class="meta-row">
+                    <span class="icon">🌊</span>
+                    <div><strong>今日路線：</strong>飯店周邊水上活動</div>
+                </div>
+                <div class="meta-row">
+                    <span class="icon">📍</span>
+                    <div><strong>今日重點：</strong>夢幻藍洞潛水 SUP海上冒險 8/17(一)</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">06:30 - 07:15</span>
+                    <div class="card">
+                        <h3>享用輕便早餐</h3>
+                        <p>建議享用易消化的食物，防止暈船。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">07:15 - 07:30</span>
+                    <div class="card">
+                        <h3>出發前往青潛 (Blue Gateway)</h3>
+                        <p>車程約 10 分鐘。</p>
+                        <div class="box box-warning">
+                            <span class="box-title">📍 GPS 導航指引</span>
+                            <span><strong>GPS 定位：</strong>26.4378610, 127.8011820<br>
+                            小路口請慢行，注意停在青潛專用車位。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">08:00 - 10:00</span>
+                    <div class="card">
+                        <h3>【青之洞窟潛水/浮潛】(已預約)</h3>
+                        <p>沖繩最著名的藍光夢幻海洞探秘。</p>
+                        <div class="box box-warning">
+                            <span class="box-title">💡 貼心叮嚀</span>
+                            <span>帶上一瓶水上船，海水很鹹，上岸後會非常口渴！</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">10:00 - 11:00</span>
+                    <div class="card">
+                        <h3>盥洗更衣</h3>
+                        <p>沐浴、更衣，吹整頭髮。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">11:15 - 12:15</span>
+                    <div class="card">
+                        <h3>殘波岬燈塔</h3>
+                        <p>沖繩本島最西端的絕壁美景。</p>
+                        <div class="box box-tip">
+                            <span class="box-title">📸 拍照秘境</span>
+                            <span>往燈塔前方的岩石區走一點（注意安全，穿好走的鞋），可以拍到驚濤浪與壯麗燈塔的合影。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">12:20 - 13:00</span>
+                    <div class="card">
+                        <h3>御菓子御殿 讀谷本店</h3>
+                        <p>現場現做的紅芋塔 (紫薯塔)，暖呼呼的超香甜！</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">13:00 - 14:00</span>
+                    <div class="card">
+                        <h3>午餐時間</h3>
+                        <p>海邊極簡 Banyan Café（或於御菓子御殿附設餐廳享用沖繩麵）。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">14:00 - 16:00</span>
+                    <div class="card">
+                        <h3>恩納村 Clear SUP (透明立槳體驗)</h3>
+                        <p>全透明的板底，可以直接看見腳下悠游的熱帶魚與珊瑚礁，拍照效果滿分！</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">16:00 - 20:00</span>
+                    <div class="card">
+                        <h3>海灘落日 & 煙火仙女棒 & 星空銀河</h3>
+                        <p>在恩納村指定開放沙灘欣賞日落，入夜後（約 19:30）在安全合法區域施放仙女棒。恩納村光害極低，天氣晴朗時抬頭即可看見絕美銀河。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">20:30 ~</span>
+                    <div class="card">
+                        <h3>返回飯店休息</h3>
+                        <p>放鬆身心。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 4 -->
+        <div class="tab-panel" id="panel-4">
+            <div class="meta-card">
+                <div class="meta-row">
+                    <span class="icon">🏨</span>
+                    <div><strong>住宿地點：</strong>Nest Hotel 那霸市久茂地</div>
+                </div>
+                <div class="meta-row">
+                    <span class="icon">🛣️</span>
+                    <div><strong>今日路線：</strong>恩納村 → 古宇利島 → 那霸</div>
+                </div>
+                <div class="meta-row">
+                    <span class="icon">📍</span>
+                    <div><strong>今日重點：</strong>古宇利島 ‧ 頂級阿古豬饗宴 8/18(二)</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">09:00 - 10:15</span>
+                    <div class="card">
+                        <h3>Check-out & 名護朝食</h3>
+                        <p>退房後出發前往名護，享用極具人氣的在地傳統早餐。</p>
+                        <div class="box box-food">
+                            <span class="box-title">🍳 早餐推薦：シママースとあさごはん</span>
+                            <span><strong>特色：</strong>名護在地傳統和風早餐，使用沖繩島鹽與新鮮食材，暖胃美味。<br>
+                            <strong>地址：</strong>名護市 Agarie 3-20-6</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">10:15 - 11:00</span>
+                    <div class="card">
+                        <h3>出發前往古宇利島</h3>
+                        <p>開車前往古宇利島，經過超美的古宇利大橋，宛如在海上飛馳。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">11:00 - 13:00</span>
+                    <div class="card">
+                        <h3>古宇利島環島慢活</h3>
+                        <p>水淺沙細的 Tiffany 藍海灘，超級適合 5 人拍閨蜜照！</p>
+                        <div class="box box-tip">
+                            <span class="box-title">🌴 環島景點 & 午餐推薦</span>
+                            <ul class="sub-details">
+                                <li><strong>心形岩 (Heart Rock)：</strong>嵐 (Arashi) 廣告爆紅景點，象徵戀人勝地。</li>
+                                <li><strong>しらさ食堂 (Shirasa)：</strong>招牌海膽炒飯、新鮮海鮮丼，店外海景無敵。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">13:00 - 14:30</span>
+                    <div class="card">
+                        <h3>網紅咖啡時光</h3>
+                        <p>探索島上的高分 Cafe 或挑戰人氣即磨黑糖咖啡 Sinmei Coffee。</p>
+                        <div class="box box-warning">
+                            <span class="box-title">⚠️ 路況注意</span>
+                            <span>路窄會車難，考驗駕駛技術，建議由經驗豐富者駕駛。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">14:30 - 15:30</span>
+                    <div class="card">
+                        <h3>驅車返回那霸市區</h3>
+                        <p>途中必停：<strong>道の駅許田 (許田休息站)</strong>。沖繩土產最齊全、價格最親民的聖地！必買黑糖、辣油。</p>
+                        <div class="box box-warning">
+                            <span class="box-title">⛽ 自駕加油提醒</span>
+                            <span>建議在名護或許田附近將車輛油箱加滿，此處油價普遍比那霸市區便宜。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">15:30 - 17:30</span>
+                    <div class="card">
+                        <h3>PARCO CITY (浦添西海岸)</h3>
+                        <p>沖繩最新最大的臨海商場，超好逛，裡面有各種日系服飾、貼紙相機 (拍貼機，閨蜜必拍！)。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">18:00 - 18:30</span>
+                    <div class="card">
+                        <h3>辦理入住</h3>
+                        <p>抵達那霸，入住 Nest Hotel 那覇市久茂地。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">19:00 - 21:30</span>
+                    <div class="card">
+                        <h3>晚餐：ASAHIYA アグーしゃぶしゃぶと餃子 アサヒ屋</h3>
+                        <p>在極具和風感的環境下享受高級阿古豬涮涮鍋。</p>
+                        <div class="box box-food">
+                            <span class="box-title">🍲 頂級阿古豬饗宴</span>
+                            <span><strong>極致推薦：</strong>人生必吃！頂級阿古豬 (Agū 豬) 手切涮涮鍋拼盤，油脂入口即化。</span>
+                        </div>
+                        <div class="box box-warning" style="margin-top: 10px;">
+                            <span class="box-title">⚡ 排雷小建議</span>
+                            <span>這裡的苦瓜口味較為家常，不習慣苦味的朋友可以跳過，專攻豬肉 and 餃子！</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">21:30 ~</span>
+                    <div class="card">
+                        <h3>國際通散步、宵夜</h3>
+                        <p>夜遊那霸最繁華的街道。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 5 -->
+        <div class="tab-panel" id="panel-5">
+            <div class="meta-card">
+                <div class="meta-row">
+                    <span class="icon">🏨</span>
+                    <div><strong>住宿地點：</strong>溫慢的家 🏠</div>
+                </div>
+                <div class="meta-row">
+                    <span class="icon">🛣️</span>
+                    <div><strong>今日路線：</strong>那霸市區 → 那霸機場</div>
+                </div>
+                <div class="meta-row">
+                    <span class="icon">📍</span>
+                    <div><strong>今日重點：</strong>海鮮朝食 ‧ 最後瘋狂血拼 ‧ 歸途 8 / 19 (三)</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">09:00 - 10:30</span>
+                    <div class="card">
+                        <h3>辦理退房 & 公設市場海鮮朝食</h3>
+                        <p>4 人行動，1 人可先去租車店處理還車前置或 5 人一起。</p>
+                        <div class="box box-food">
+                            <span class="box-title">🍣 早餐推薦：第一牧志公設市場</span>
+                            <span><strong>特色：</strong>在 1 樓挑選新鮮的龍蝦、夜光貝、刺身，直接上 2 樓代客料理，新鮮美味！</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">10:30 - 14:30</span>
+                    <div class="card">
+                        <h3>國際通 (Kokusai Dori) 最後掃貨</h3>
+                        <p><strong>驚安殿堂唐吉訶德 (Don Quijote)：</strong>國際通上有巨大的唐吉訶德，專屬退稅櫃台，藥妝零食一網打盡。</p>
+                        <div class="box box-tip">
+                            <span class="box-title">🍍 驚喜發現</span>
+                            <span>國際通上有專賣新鮮菠蘿（鳳梨）的土產店，可以現切現吃，甜度爆表！</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">14:30 - 15:45</span>
+                    <div class="card">
+                        <h3>還車加油</h3>
+                        <p>進行最後一波加油 (還車前須加滿油)，開往租車營業所。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">15:45 - 16:30</span>
+                    <div class="card">
+                        <h3>還車手續</h3>
+                        <p>辦理還車手續。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">16:30 - 17:00</span>
+                    <div class="card">
+                        <h3>接駁前往機場</h3>
+                        <p>搭乘租車公司的免費接駁巴士前往那霸機場 (車程約 30 分鐘)。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">17:00 - 19:00</span>
+                    <div class="card">
+                        <h3>那霸機場國內線航廈 (手信天堂)</h3>
+                        <p>最後的採購機會。</p>
+                        <div class="box box-tip">
+                            <span class="box-title">🛍️ 機場血拼攻略</span>
+                            <span>那霸機場的國內線 2 樓伴手禮商店 (如：SATA ANDAGI 炸砂糖球、年輪蛋糕、Calbee+現炸薯條) 比國際線航廈好逛 10 倍！3 樓的餐廳選擇也更多。</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">19:00 - 19:30</span>
+                    <div class="card">
+                        <h3>安全檢查</h3>
+                        <p>通過國際線安全檢查。</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <span class="time-badge">20:25 ~</span>
+                    <div class="card">
+                        <h3>飛往香港</h3>
+                        <p>搭乘 UO825 飛往香港（預計 22:10 抵達）。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- UTILITY GUIDE (實用攻略) -->
+        <div class="tab-panel" id="panel-6">
+            <h2 class="section-header">🎒 行前準備、打包與退稅指南</h2>
+            
+            <div class="checklist-container">
+                <div class="checklist-card">
+                    <h4>👒 閨蜜專屬打包好物</h4>
+                    <ul class="sub-details">
+                        <li><strong>防曬三寶：</strong>友善海洋防曬乳 (潛水用), 太陽眼鏡, 寬邊草帽。</li>
+                        <li><strong>防水裝備：</strong>手機防水袋 (潛水/SUP 拍照用), 速乾大毛巾, 夾腳拖。</li>
+                        <li><strong>鞋子：</strong>1 雙好走的運動鞋 (殘波岬、逛國際通), 1 雙拍照涼鞋。</li>
+                        <li><strong>電力保障：</strong>建議帶一個多孔 USB 延長線 (女生們美容電器與手機充電極多)。</li>
+                    </ul>
+                </div>
+                
+                <div class="checklist-card">
+                    <h4>💵 免稅 (Tax-Free) 流程與備案</h4>
+                    <ul class="sub-details">
+                        <li><strong>免稅門檻：</strong>同一店鋪當天消費滿 5,000 日圓 (不含稅) 即可退稅。</li>
+                        <li><strong>退稅手續：</strong>出示護照正本 → 店員貼上商品申報單 → 商品用免稅袋密封。</li>
+                        <li><strong>雨天備案：</strong>若遇大雨，可將 Day 3 改為室內行程，如美麗海水族館、PARCO CITY 或永旺夢樂城來客夢。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 class="section-header">🏨 沖繩住宿詳細資訊</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>住宿酒店</th>
+                            <th>入住日期</th>
+                            <th>地址 & 交通</th>
+                            <th>聯絡電話</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Hotel Chula Vista Senaga</strong></td>
+                            <td>2026/08/15(六) - 08/16(日)<br>CI: 15:00-21:00 | CO: 11:00</td>
+                            <td>沖縄県那覇市具志3-24-1<br><small style="color:var(--text-light)">從那霸機場開車約10分鐘</small></td>
+                            <td>098-989-7617</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Aqua Shallows</strong></td>
+                            <td>2026/08/16(日) - 08/18(二)<br>CI: 15:00+ | CO: 11:00</td>
+                            <td>Kunigami District, Onna, Maeda, 3378-11 アクアシャローズ<br><small style="color:var(--text-light)">國道58線開車約50分鐘</small></td>
+                            <td>+81 70-8442-9136</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Nest Hotel Naha Kumoji</strong></td>
+                            <td>2026/08/18(二) - 08/19 (三)<br>CI: 15:00+ | CO: 11:00</td>
+                            <td>沖縄県那覇市久茂地2-22-5<br><small style="color:var(--text-light)">美榮橋站步行5分 / 機場開車10分</small></td>
+                            <td>098-975-7385</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="section-header">🎁 沖繩必買伴手禮黃金清單</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 30%">伴手禮名稱</th>
+                            <th>特色與推薦理由</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>紅芋塔 (紅いもタルト)</strong></td>
+                            <td>沖繩最經典的代名詞，御菓子御殿出品。帶回家用烤箱微微烤過，香甜美味倍增。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>石垣島辣油 (辺銀食堂)</strong></td>
+                            <td>拌麵、沾餃子的神物，香辣帶麻，風味層次極其豐富。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>雪鹽金楚糕 (ちんすこう)</strong></td>
+                            <td>鹹甜交織的沖繩傳統點心，宮古島雪鹽完美平衡了金楚糕的酥甜。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>35 COFFEE</strong></td>
+                            <td>使用沖繩風化珊瑚烘焙的咖啡，口感溫潤。購買還能支持珊瑚保育，兼具環保與美味。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>LuLuLun 沖繩限定面膜</strong></td>
+                            <td>沖繩香檬 (Shequasar) 與西印度櫻桃口味，包裝粉嫩可愛，送給閨蜜姊妹的首選！</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="blessing-card">
+                <p>🏄‍♀️ 祝你們擁有一趟充滿歡笑、美照與美食的完美沖繩盛夏之旅！ 🥂</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Scroll-to-Top Button -->
+    <button class="floating-top-btn" id="scrollTopBtn">▲</button>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 MMC Girls Trip. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Logic JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // 1. 綁定分頁按鈕（解決點擊穿透問題）
+            const tabButtons = document.querySelectorAll(".tab-btn");
+            const tabPanels = document.querySelectorAll(".tab-panel");
+            const nav = document.getElementById("tabsNav");
+
+            tabButtons.forEach(btn => {
+                // 同時監聽手機 Touch 與電腦 Click 事件，避免反應遲鈍
+                btn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    
+                    const dayNum = this.getAttribute("data-day");
+                    
+                    // 隱藏所有分頁 & 取消選取按鈕
+                    tabPanels.forEach(p => p.classList.remove("active"));
+                    tabButtons.forEach(b => b.classList.remove("active"));
+
+                    // 啟用當前分頁與按鈕
+                    document.getElementById("panel-" + dayNum).classList.add("active");
+                    this.classList.add("active");
+
+                    // 讓目前按鈕在橫向導覽列中居中
+                    const navWidth = nav.offsetWidth;
+                    const btnLeft = this.offsetLeft;
+                    const btnWidth = this.offsetWidth;
+                    nav.scroll({
+                        left: btnLeft - (navWidth / 2) + (btnWidth / 2),
+                        behavior: "smooth"
+                    });
+
+                    // 網頁平滑捲動回到頂端
+                    window.scrollTo({
+                        top: document.querySelector('header').offsetHeight - 10,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // 2. 解決手機點擊卡片放大 3% 與點點變色的事件綁定
+            const timelineItems = document.querySelectorAll(".timeline-item");
+            timelineItems.forEach(item => {
+                item.addEventListener("click", function(e) {
+                    // 如果點擊的是裡面的連結（如果有），不予干擾
+                    if (e.target.tagName === 'A') return;
+
+                    // 如果本來就點亮了，點一下就取消；如果沒點亮，就把別人洗掉自己變亮
+                    const isAlreadyActive = this.classList.contains("active-item");
+                    timelineItems.forEach(i => i.classList.remove("active-item"));
+                    
+                    if (!isAlreadyActive) {
+                        this.classList.add("active-item");
+                    }
+                });
+            });
+
+            // 3. 返回頂端按鈕機制
+            const scrollTopBtn = document.getElementById("scrollTopBtn");
+            window.addEventListener("scroll", function() {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.style.opacity = "1";
+                    scrollTopBtn.style.visibility = "visible";
+                } else {
+                    scrollTopBtn.style.opacity = "0";
+                    scrollTopBtn.style.visibility = "hidden";
+                }
+            });
+
+            scrollTopBtn.addEventListener("click", function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+        });
+    </script>
+</body>
+</html>
